@@ -1,0 +1,59 @@
+function convertToRoman(num) {
+  //base 10: changes every 2 numerals
+  const roman = ['I', 'V', 'X', 'L', 'C', 'D', 'M'];
+  //break the number into an array by digits
+  var numArr = num.toString().split('')
+              .map(i => parseInt(i));
+  console.log(numArr);
+  var romanArr = [];
+  //loop through the array, adding to romanArray
+  for (let i = 0; i < numArr.length; i++) {
+    //base only works for specific number of digits
+    let base = 2*numArr.length - 2*i - 2;
+    switch (numArr[i]) {
+      case 1:
+        romanArr.push(roman[base]);
+        break;
+      case 2:
+        romanArr.push(roman[base]);
+        romanArr.push(roman[base]);
+        break;
+      case 3:
+        romanArr.push(roman[base]);
+        romanArr.push(roman[base]);
+        romanArr.push(roman[base]);
+        break;
+      case 4:
+        romanArr.push(roman[base]);
+        romanArr.push(roman[base + 1]);
+        break;
+      case 5:
+        romanArr.push(roman[base + 1]);
+        break;
+      case 6:
+        romanArr.push(roman[base + 1]);
+        romanArr.push(roman[base]);
+        break;
+      case 7:
+        romanArr.push(roman[base + 1]);
+        romanArr.push(roman[base]);
+        romanArr.push(roman[base]);
+        break;
+      case 8:
+        romanArr.push(roman[base + 1]);
+        romanArr.push(roman[base]);
+        romanArr.push(roman[base]);
+        romanArr.push(roman[base]);
+        break;
+      case 9:
+        romanArr.push(roman[base]);
+        romanArr.push(roman[base + 2]);
+        break;
+      case 0:
+        break;
+    };
+  };
+  return romanArr.join('');
+};
+
+console.log(convertToRoman(3335));
