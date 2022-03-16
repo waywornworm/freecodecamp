@@ -64,6 +64,3 @@ def arithmetic_arranger(problems, answer=False):
         return ''.join(topLine + midLine + breakLine + bottomLine)
     else:
         return ''.join(topLine + midLine + breakLine)
-
-
-print(arithmetic_arranger(['3801 - 2', '123 + 49'], True))
