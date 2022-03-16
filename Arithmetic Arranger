@@ -1,0 +1,69 @@
+#this follows the rules of freecodecamp.org's 'Arithmetic Formatter' challenge, found under the 'Scientific Computing with Python' course.
+
+def arithmetic_arranger(problems, answer=False):
+    topLine = []; midLine = []; breakLine = []; bottomLine = []
+    space = ' '; indent = '    '
+    # address all the potential errors
+    if len(problems) > 5:
+        return 'Error: Too many problems.'
+    splitted = []
+    for expr in problems:
+        splitted.append(expr.split(' '))
+    for [num1, op, num2] in splitted:
+        if op != '+' and op != '-':
+            return "Error: Operator must be '+' or '-'."
+        if len(str(num1)) > 4 or len(str(num2)) > 4:
+            return 'Error: Numbers cannot be more than four digits.'
+        if num1.isdigit() is False or num2.isdigit() is False:
+            return 'Error: Numbers must only contain digits.'
+
+        # for the first line
+        topLine.append(space); topLine.append(space)
+        topcount = 0
+        while topcount < (max(len(str(num1)), len(str(num2))) - len(str(num1))):
+            topLine.append(space)
+            topcount += 1
+        topLine.append(num1); topLine.append(indent)
+
+        # for the second line
+        midLine.append(op); midLine.append(space)
+        midcount = 0
+        while midcount < (max(len(str(num1)), len(str(num2))) - len(str(num2))):
+            midLine.append(space)
+            midcount += 1
+        midLine.append(num2); midLine.append(indent)
+
+        # for the line under the problem
+        dashes = 0
+        while dashes < (max(len(str(num1)), len(str(num2))) + 2):
+            breakLine.append('-')
+            dashes += 1
+        breakLine.append(indent)
+
+        # bottom line
+        if answer == True and op == '+':
+            bottomcount = 0
+            while bottomcount < (2 + max(len(str(num1)), len(str(num2))) - len(str(int(num1) + int(num2)))):
+                bottomLine.append(space)
+                bottomcount += 1
+            bottomLine.append(str(int(num1) + int(num2))); bottomLine.append(indent)
+        elif answer == True and op == '-':
+            bottomcount = 0
+            while bottomcount < (2 + max(len(str(num1)), len(str(num2))) - len(str(int(num1) - int(num2)))):
+                bottomLine.append(space)
+                bottomcount += 1
+            bottomLine.append(str(int(num1) - int(num2)));
+            bottomLine.append(indent)
+
+    #remove an extra indent, print the lines!
+    topLine.pop(); midLine.pop(); breakLine.pop()
+    topLine.append('\n'); midLine.append('\n')
+    if answer == True:
+        breakLine.append('\n')
+        bottomLine.pop()
+        return ''.join(topLine + midLine + breakLine + bottomLine)
+    else:
+        return ''.join(topLine + midLine + breakLine)
+
+
+print(arithmetic_arranger(['3801 - 2', '123 + 49'], True))
